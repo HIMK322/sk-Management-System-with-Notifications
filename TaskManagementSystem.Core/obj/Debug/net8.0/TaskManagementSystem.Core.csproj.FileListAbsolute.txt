@@ -1,0 +1,11 @@
+C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Core\bin\Debug\net8.0\TaskManagementSystem.Core.deps.json
+C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Core\bin\Debug\net8.0\TaskManagementSystem.Core.dll
+C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Core\bin\Debug\net8.0\TaskManagementSystem.Core.pdb
+C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Core\obj\Debug\net8.0\TaskManagementSystem.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Core\obj\Debug\net8.0\TaskManagementSystem.Core.AssemblyInfoInputs.cache
+C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Core\obj\Debug\net8.0\TaskManagementSystem.Core.AssemblyInfo.cs
+C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Core\obj\Debug\net8.0\TaskManagementSystem.Core.csproj.CoreCompileInputs.cache
+C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Core\obj\Debug\net8.0\TaskManagementSystem.Core.dll
+C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Core\obj\Debug\net8.0\refint\TaskManagementSystem.Core.dll
+C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Core\obj\Debug\net8.0\TaskManagementSystem.Core.pdb
+C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Core\obj\Debug\net8.0\ref\TaskManagementSystem.Core.dll

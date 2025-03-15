@@ -1,0 +1,5 @@
+C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Infrastructure\obj\Debug\net8.0\TaskManagementSystem.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Infrastructure\obj\Debug\net8.0\TaskManagementSystem.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Infrastructure\obj\Debug\net8.0\TaskManagementSystem.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Infrastructure\obj\Debug\net8.0\TaskManagementSystem.Infrastructure.AssemblyInfo.cs
+C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Infrastructure\obj\Debug\net8.0\TaskManagementSystem.Infrastructure.csproj.CoreCompileInputs.cache
