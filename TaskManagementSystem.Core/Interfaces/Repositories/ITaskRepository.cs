@@ -13,6 +13,8 @@ namespace TaskManagementSystem.Core.Interfaces.Repositories
         Task<IEnumerable<TaskItem>> GetTasksByUserIdAsync(Guid userId);
         Task<TaskItem> CreateAsync(TaskItem task);
         Task UpdateAsync(TaskItem task);
-        Task DeleteAsync(Guid id);
+        Task DeleteAsync(Guid id);        
+        Task<IEnumerable<TaskItem>> GetDeletedTasksAsync();
+        Task RestoreAsync(Guid id);
     }
 }

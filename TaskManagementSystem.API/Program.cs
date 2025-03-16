@@ -5,13 +5,18 @@ using Microsoft.OpenApi.Models;
 using Serilog;
 using System.Text;
 using Hangfire;
-using Hangfire.PostgreSql;
+using TaskManagementSystem.API.Extensions;
 using TaskManagementSystem.API.Middlewares;
 using TaskManagementSystem.Core.Interfaces.Repositories;
 using TaskManagementSystem.Core.Interfaces.Services;
 using TaskManagementSystem.Infrastructure.Data;
 using TaskManagementSystem.Infrastructure.Data.Repositories;
+using TaskManagementSystem.Infrastructure.Helpers;
 using TaskManagementSystem.Infrastructure.Services;
+using AspNetCoreRateLimit;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
+using System.Threading.RateLimiting;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,7 +31,10 @@ Log.Logger = new LoggerConfiguration()
 builder.Host.UseSerilog();
 
 // Add services to the container
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
+});
 
 // Configure CORS
 builder.Services.AddCors(options =>
@@ -38,6 +46,20 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader();
     });
 });
+
+// Configure Redis Cache
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = builder.Configuration.GetConnectionString("RedisCache") ?? "localhost:6379";
+    options.InstanceName = "TaskManagement_";
+});
+
+// Configure Rate Limiting with Redis
+builder.Services.AddMemoryCache();
+builder.Services.Configure<IpRateLimitOptions>(builder.Configuration.GetSection("IpRateLimiting"));
+builder.Services.Configure<IpRateLimitPolicies>(builder.Configuration.GetSection("IpRateLimitPolicies"));
+builder.Services.AddInMemoryRateLimiting();
+builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
 
 // Configure DbContext
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -56,7 +78,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidIssuer = builder.Configuration["Jwt:Issuer"],
             ValidAudience = builder.Configuration["Jwt:Audience"],
             IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+                Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"] ?? 
+                    throw new ArgumentNullException("Jwt:Key", "JWT key is not configured")))
         };
     });
 
@@ -67,13 +90,23 @@ builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
 
 // Register services
 builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddScoped<ITaskService, TaskService>();
+builder.Services.AddSingleton<ICacheService, RedisCacheService>();
 builder.Services.AddScoped<INotificationService, NotificationService>();
 
-// Configure Hangfire for background jobs
-builder.Services.AddHangfire(config =>
-    config.UsePostgreSqlStorage(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddHangfireServer();
+// Register TaskService with cache dependency
+builder.Services.AddScoped<ITaskService>(provider => new TaskService(
+    provider.GetRequiredService<ITaskRepository>(),
+    provider.GetRequiredService<IUserRepository>(),
+    provider.GetRequiredService<INotificationService>(),
+    provider.GetRequiredService<ICacheService>(),
+    provider.GetRequiredService<ILogger<TaskService>>()
+));
+
+// Configure Hangfire with Redis
+builder.Services.AddHangfireWithRedis(builder.Configuration);
+
+// Add Health Checks
+builder.Services.AddApplicationHealthChecks(builder.Configuration);
 
 // Configure Swagger
 builder.Services.AddEndpointsApiExplorer();
@@ -109,9 +142,15 @@ builder.Services.AddSwaggerGen(c =>
             Array.Empty<string>()
         }
     });
+    c.CustomSchemaIds(type => type.FullName);
 });
 
 var app = builder.Build();
+
+// Initialize Redis connection
+var loggerFactory = app.Services.GetRequiredService<ILoggerFactory>();
+var redisLogger = loggerFactory.CreateLogger<Program>();
+RedisConnectionHelper.InitializeConnection(builder.Configuration, redisLogger);
 
 // Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
@@ -125,6 +164,9 @@ else
     app.UseExceptionHandler("/error");
     app.UseHsts();
 }
+
+// Use rate limiting middleware
+app.UseIpRateLimiting();
 
 // Custom middleware for exception handling
 app.UseMiddleware<ExceptionHandlingMiddleware>();
@@ -140,11 +182,13 @@ app.UseAuthorization();
 // Configure Hangfire dashboard
 app.UseHangfireDashboard("/hangfire", new DashboardOptions
 {
-    // Configure authorization for Hangfire dashboard if needed
-    // Authorization = new[] { new HangfireAuthorizationFilter() }
+    // Set to true in production to require authentication
+    IsReadOnlyFunc = context => app.Environment.IsProduction()
 });
 
+// Map controllers and health checks
 app.MapControllers();
+app.MapHealthChecks();
 app.MapHangfireDashboard();
 
 // Ensure database is created and apply migrations
@@ -160,8 +204,8 @@ using (var scope = app.Services.CreateScope())
     }
     catch (Exception ex)
     {
-        var logger = services.GetRequiredService<ILogger<Program>>();
-        logger.LogError(ex, "An error occurred while migrating or initializing the database.");
+        var dbLogger = services.GetRequiredService<ILogger<Program>>();
+        dbLogger.LogError(ex, "An error occurred while migrating or initializing the database.");
     }
 }
 

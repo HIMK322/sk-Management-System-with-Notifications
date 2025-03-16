@@ -3,3 +3,16 @@ C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Infrastructure\o
 C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Infrastructure\obj\Debug\net8.0\TaskManagementSystem.Infrastructure.AssemblyInfoInputs.cache
 C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Infrastructure\obj\Debug\net8.0\TaskManagementSystem.Infrastructure.AssemblyInfo.cs
 C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Infrastructure\obj\Debug\net8.0\TaskManagementSystem.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Infrastructure\obj\Debug\net8.0\TaskManagementSystem.Infrastructure.sourcelink.json
+C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Infrastructure\bin\Debug\net8.0\TaskManagementSystem.Infrastructure.deps.json
+C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Infrastructure\bin\Debug\net8.0\TaskManagementSystem.Infrastructure.runtimeconfig.json
+C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Infrastructure\bin\Debug\net8.0\TaskManagementSystem.Infrastructure.dll
+C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Infrastructure\bin\Debug\net8.0\TaskManagementSystem.Infrastructure.pdb
+C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Infrastructure\bin\Debug\net8.0\TaskManagementSystem.Core.dll
+C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Infrastructure\bin\Debug\net8.0\TaskManagementSystem.Core.pdb
+C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Infrastructure\obj\Debug\net8.0\TaskMana.43AAB007.Up2Date
+C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Infrastructure\obj\Debug\net8.0\TaskManagementSystem.Infrastructure.dll
+C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Infrastructure\obj\Debug\net8.0\refint\TaskManagementSystem.Infrastructure.dll
+C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Infrastructure\obj\Debug\net8.0\TaskManagementSystem.Infrastructure.pdb
+C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Infrastructure\obj\Debug\net8.0\TaskManagementSystem.Infrastructure.genruntimeconfig.cache
+C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Infrastructure\obj\Debug\net8.0\ref\TaskManagementSystem.Infrastructure.dll

@@ -40,7 +40,7 @@ namespace TaskManagementSystem.Infrastructure.Data.Repositories
                 .Include(t => t.CreatedBy)
                 .Include(t => t.AssignedTo)
                 .Where(t => t.AssignedToId == userId && 
-                           (t.Status == TaskStatus.Pending || t.Status == TaskStatus.InProgress))
+                          (t.Status == TaskStatus.Pending || t.Status == TaskStatus.InProgress))
                 .ToListAsync();
         }
 
@@ -73,6 +73,30 @@ namespace TaskManagementSystem.Infrastructure.Data.Repositories
             if (task != null)
             {
                 _context.Tasks.Remove(task);
+                await _context.SaveChangesAsync();
+            }
+        }
+        
+        public async Task<IEnumerable<TaskItem>> GetDeletedTasksAsync()
+        {
+            return await _context.Tasks
+                .IgnoreQueryFilters() 
+                .Where(t => t.IsDeleted)
+                .Include(t => t.CreatedBy)
+                .Include(t => t.AssignedTo)
+                .ToListAsync();
+        }
+        
+        public async Task RestoreAsync(Guid id)
+        {
+            var task = await _context.Tasks
+                .IgnoreQueryFilters()
+                .FirstOrDefaultAsync(t => t.Id == id && t.IsDeleted);
+                
+            if (task != null)
+            {
+                task.IsDeleted = false;
+                task.DeletedAt = null;
                 await _context.SaveChangesAsync();
             }
         }

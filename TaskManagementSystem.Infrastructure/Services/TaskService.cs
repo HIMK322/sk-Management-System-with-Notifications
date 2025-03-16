@@ -17,46 +17,71 @@ namespace TaskManagementSystem.Infrastructure.Services
         private readonly ITaskRepository _taskRepository;
         private readonly IUserRepository _userRepository;
         private readonly INotificationService _notificationService;
+        private readonly ICacheService _cacheService;
         private readonly ILogger<TaskService> _logger;
+
+        private readonly TimeSpan _cacheDuration = TimeSpan.FromMinutes(10);
 
         public TaskService(
             ITaskRepository taskRepository,
             IUserRepository userRepository,
             INotificationService notificationService,
+            ICacheService cacheService,
             ILogger<TaskService> logger)
         {
             _taskRepository = taskRepository;
             _userRepository = userRepository;
             _notificationService = notificationService;
+            _cacheService = cacheService;
             _logger = logger;
         }
 
         public async Task<IEnumerable<TaskDto>> GetAllTasksAsync()
         {
-            var tasks = await _taskRepository.GetAllAsync();
-            return tasks.Select(MapToTaskDto);
+            return await _cacheService.GetOrCreateAsync(
+                "tasks_all",
+                async () => {
+                    var tasks = await _taskRepository.GetAllAsync();
+                    return tasks.Select(MapToTaskDto).ToList();
+                },
+                _cacheDuration);
         }
 
         public async Task<TaskDto> GetTaskByIdAsync(Guid id)
         {
-            var task = await _taskRepository.GetByIdAsync(id);
-            if (task == null)
-            {
-                throw new NotFoundException("Task not found");
-            }
-            return MapToTaskDto(task);
+            return await _cacheService.GetOrCreateAsync(
+                $"task_{id}",
+                async () => {
+                    var task = await _taskRepository.GetByIdAsync(id);
+                    if (task == null)
+                    {
+                        throw new NotFoundException("Task not found");
+                    }
+                    return MapToTaskDto(task);
+                },
+                _cacheDuration);
         }
 
         public async Task<IEnumerable<TaskDto>> GetPendingTasksAsync(Guid userId)
         {
-            var tasks = await _taskRepository.GetPendingTasksAsync(userId);
-            return tasks.Select(MapToTaskDto);
+            return await _cacheService.GetOrCreateAsync(
+                $"pending_tasks_{userId}",
+                async () => {
+                    var tasks = await _taskRepository.GetPendingTasksAsync(userId);
+                    return tasks.Select(MapToTaskDto).ToList();
+                },
+                _cacheDuration);
         }
 
         public async Task<IEnumerable<TaskDto>> GetTasksByUserIdAsync(Guid userId)
         {
-            var tasks = await _taskRepository.GetTasksByUserIdAsync(userId);
-            return tasks.Select(MapToTaskDto);
+            return await _cacheService.GetOrCreateAsync(
+                $"user_tasks_{userId}",
+                async () => {
+                    var tasks = await _taskRepository.GetTasksByUserIdAsync(userId);
+                    return tasks.Select(MapToTaskDto).ToList();
+                },
+                _cacheDuration);
         }
 
         public async Task<TaskDto> CreateTaskAsync(CreateTaskDto createTaskDto, Guid currentUserId)
@@ -100,6 +125,8 @@ namespace TaskManagementSystem.Infrastructure.Services
                     createdTask.Id, createdTask.AssignedToId.Value);
             }
 
+            await InvalidateTaskCaches(createdTask);
+
             return MapToTaskDto(createdTask);
         }
 
@@ -113,10 +140,13 @@ namespace TaskManagementSystem.Infrastructure.Services
 
             task.Title = updateTaskDto.Title;
             task.Description = updateTaskDto.Description;
-            task.Status = updateTaskDto.Status;
+            task.Status = TaskManagementSystem.Core.Entities.TaskStatus.Completed;
             task.DueDate = updateTaskDto.DueDate;
+            task.UpdatedAt = DateTime.UtcNow;
 
             await _taskRepository.UpdateAsync(task);
+            await InvalidateTaskCaches(task);
+
             return MapToTaskDto(task);
         }
 
@@ -148,7 +178,14 @@ namespace TaskManagementSystem.Infrastructure.Services
             {
                 await _notificationService.CreateTaskAssignmentNotificationAsync(
                     task.Id, task.AssignedToId.Value);
+                
+                if (previousAssigneeId.HasValue)
+                {
+                    await InvalidateUserTaskCaches(previousAssigneeId.Value);
+                }
             }
+
+            await InvalidateTaskCaches(task);
 
             return MapToTaskDto(task);
         }
@@ -165,6 +202,8 @@ namespace TaskManagementSystem.Infrastructure.Services
             task.UpdatedAt = DateTime.UtcNow;
 
             await _taskRepository.UpdateAsync(task);
+            await InvalidateTaskCaches(task);
+
             return MapToTaskDto(task);
         }
 
@@ -177,6 +216,7 @@ namespace TaskManagementSystem.Infrastructure.Services
             }
 
             await _taskRepository.DeleteAsync(id);
+            await InvalidateTaskCaches(task);
         }
 
         private TaskDto MapToTaskDto(TaskItem task)
@@ -195,6 +235,56 @@ namespace TaskManagementSystem.Infrastructure.Services
                 AssignedToId = task.AssignedToId,
                 AssignedToUsername = task.AssignedTo?.Username
             };
+        }
+
+        private async Task InvalidateTaskCaches(TaskItem task)
+        {
+            // Invalidate specific task cache
+            await _cacheService.RemoveAsync($"task_{task.Id}");
+            
+            // Invalidate all tasks cache
+            await _cacheService.RemoveAsync("tasks_all");
+            
+            // Invalidate user-specific caches
+            if (task.CreatedById != Guid.Empty)
+            {
+                await InvalidateUserTaskCaches(task.CreatedById);
+            }
+            
+            if (task.AssignedToId.HasValue)
+            {
+                await InvalidateUserTaskCaches(task.AssignedToId.Value);
+            }
+        }
+
+        private async Task InvalidateUserTaskCaches(Guid userId)
+        {
+            await _cacheService.RemoveAsync($"user_tasks_{userId}");
+            await _cacheService.RemoveAsync($"pending_tasks_{userId}");
+        }
+        
+        public async Task<IEnumerable<TaskDto>> GetDeletedTasksAsync()
+        {
+            var tasks = await _taskRepository.GetDeletedTasksAsync();
+            return tasks.Select(MapToTaskDto);
+        }
+
+        public async Task<TaskDto> RestoreTaskAsync(Guid id)
+        {
+            await _taskRepository.RestoreAsync(id);
+            
+            var task = await _taskRepository.GetByIdAsync(id);
+            if (task == null)
+            {
+                throw new NotFoundException("Task could not be restored");
+            }
+            
+            // Invalidate relevant caches
+            await InvalidateTaskCaches(task);
+            
+            _logger.LogInformation($"Task {id} has been restored");
+            
+            return MapToTaskDto(task);
         }
     }
 }

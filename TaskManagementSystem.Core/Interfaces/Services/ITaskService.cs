@@ -15,6 +15,8 @@ namespace TaskManagementSystem.Core.Interfaces.Services
         Task<TaskDto> UpdateTaskAsync(Guid id, UpdateTaskDto updateTaskDto);
         Task<TaskDto> AssignTaskAsync(Guid id, AssignTaskDto assignTaskDto);
         Task<TaskDto> CompleteTaskAsync(Guid id);
-        Task DeleteTaskAsync(Guid id);
+        Task DeleteTaskAsync(Guid id);        
+        Task<IEnumerable<TaskDto>> GetDeletedTasksAsync();
+        Task<TaskDto> RestoreTaskAsync(Guid id);
     }
 }

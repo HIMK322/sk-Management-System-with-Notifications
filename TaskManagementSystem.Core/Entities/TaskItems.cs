@@ -1,4 +1,5 @@
 using System;
+using TaskManagementSystem.Core.Interfaces;
 
 namespace TaskManagementSystem.Core.Entities
 {
@@ -9,7 +10,7 @@ namespace TaskManagementSystem.Core.Entities
         Completed
     }
 
-    public class TaskItem
+    public class TaskItem : ISoftDelete
     {
         public Guid Id { get; set; }
         public string Title { get; set; }
@@ -26,5 +27,9 @@ namespace TaskManagementSystem.Core.Entities
         // Navigation properties
         public User CreatedBy { get; set; }
         public User AssignedTo { get; set; }
+        
+        // Soft delete properties
+        public bool IsDeleted { get; set; } = false;
+        public DateTime? DeletedAt { get; set; }
     }
 }

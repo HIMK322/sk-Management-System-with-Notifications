@@ -88,6 +88,24 @@ namespace TaskManagementSystem.API.Controllers
             await _taskService.DeleteTaskAsync(id);
             return NoContent();
         }
+        
+        // New endpoints for soft delete functionality
+        
+        [HttpGet("deleted")]
+        [Authorize(Roles = "Admin")] // Optional: restrict to admins
+        public async Task<ActionResult<IEnumerable<TaskDto>>> GetDeletedTasks()
+        {
+            var tasks = await _taskService.GetDeletedTasksAsync();
+            return Ok(tasks);
+        }
+        
+        [HttpPost("{id}/restore")]
+        [Authorize(Roles = "Admin")] // Optional: restrict to admins
+        public async Task<ActionResult<TaskDto>> RestoreTask(Guid id)
+        {
+            var task = await _taskService.RestoreTaskAsync(id);
+            return Ok(task);
+        }
 
         private Guid GetCurrentUserId()
         {

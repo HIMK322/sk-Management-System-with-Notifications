@@ -9,3 +9,4 @@ C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Core\obj\Debug\n
 C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Core\obj\Debug\net8.0\refint\TaskManagementSystem.Core.dll
 C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Core\obj\Debug\net8.0\TaskManagementSystem.Core.pdb
 C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Core\obj\Debug\net8.0\ref\TaskManagementSystem.Core.dll
+C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Core\obj\Debug\net8.0\TaskManagementSystem.Core.sourcelink.json
