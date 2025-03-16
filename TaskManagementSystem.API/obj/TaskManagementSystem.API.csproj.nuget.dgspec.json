@@ -74,6 +74,10 @@
               "target": "Package",
               "version": "[1.8.18, )"
             },
+            "Hangfire.MemoryStorage": {
+              "target": "Package",
+              "version": "[1.8.1.1, )"
+            },
             "Hangfire.PostgreSql": {
               "target": "Package",
               "version": "[1.20.10, )"

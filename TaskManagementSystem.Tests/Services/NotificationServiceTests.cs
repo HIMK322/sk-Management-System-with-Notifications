@@ -36,9 +36,10 @@ namespace TaskManagementSystem.Tests.Services
             {
                 Id = Guid.NewGuid(),
                 Title = "Notification Test Task",
-                CreatedById = otherUserId,
+                Description = "Test task description", 
                 CreatedAt = DateTime.UtcNow,
-                DueDate = DateTime.UtcNow.AddDays(1)
+                DueDate = DateTime.UtcNow.AddDays(1),
+                Status = Core.Entities.TaskStatus.Pending 
             };
             
             await context.Tasks.AddAsync(task);
@@ -112,9 +113,11 @@ namespace TaskManagementSystem.Tests.Services
             {
                 Id = Guid.NewGuid(),
                 Title = "Unread Notification Test Task",
+                Description = "Test task description for unread notifications",
                 CreatedById = Guid.NewGuid(),
                 CreatedAt = DateTime.UtcNow,
-                DueDate = DateTime.UtcNow.AddDays(1)
+                DueDate = DateTime.UtcNow.AddDays(1),
+                Status = Core.Entities.TaskStatus.Pending 
             };
             
             await context.Tasks.AddAsync(task);
@@ -182,6 +185,21 @@ namespace TaskManagementSystem.Tests.Services
             var notificationRepository = new NotificationRepository(context);
             var taskRepository = new TaskRepository(context);
             
+            // Create test task for the notification
+            var task = new TaskItem
+            {
+                Id = Guid.NewGuid(),
+                Title = "Task for read notification",
+                Description = "Description for task with read notification", 
+                CreatedById = Guid.NewGuid(),
+                CreatedAt = DateTime.UtcNow,
+                DueDate = DateTime.UtcNow.AddDays(1),
+                Status = Core.Entities.TaskStatus.Pending 
+            };
+            
+            await context.Tasks.AddAsync(task);
+            await context.SaveChangesAsync();
+            
             // Create unread notification
             var notification = new Notification
             {
@@ -190,7 +208,7 @@ namespace TaskManagementSystem.Tests.Services
                 Type = NotificationType.TaskAssigned,
                 IsRead = false,
                 UserId = Guid.NewGuid(),
-                TaskId = Guid.NewGuid(),
+                TaskId = task.Id,
                 CreatedAt = DateTime.UtcNow
             };
             

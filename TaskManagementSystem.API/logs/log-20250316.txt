@@ -1,0 +1,183 @@
+2025-03-16 11:37:46.308 +03:00 [WRN] Entity 'TaskItem' has a global query filter defined and is the required end of a relationship with the entity 'Notification'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-03-16 11:37:46.552 +03:00 [WRN] Entity 'TaskItem' has a global query filter defined and is the required end of a relationship with the entity 'Notification'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-03-16 11:38:20.417 +03:00 [WRN] Entity 'TaskItem' has a global query filter defined and is the required end of a relationship with the entity 'Notification'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-03-16 11:38:42.663 +03:00 [INF] Redis connection initialized successfully
+2025-03-16 11:43:52.034 +03:00 [INF] Redis connection initialized successfully
+2025-03-16 12:08:59.138 +03:00 [WRN] Entity 'TaskItem' has a global query filter defined and is the required end of a relationship with the entity 'Notification'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-03-16 12:35:07.472 +03:00 [WRN] Entity 'TaskItem' has a global query filter defined and is the required end of a relationship with the entity 'Notification'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-03-16 12:35:08.331 +03:00 [INF] Starting Hangfire Server using job storage: 'Hangfire.MemoryStorage.MemoryStorage'
+2025-03-16 12:35:08.336 +03:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 4
+    Listening queues: 'default', 'notifications', 'critical'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2025-03-16 12:35:08.442 +03:00 [INF] Server code-runner:14504:26fc508c successfully announced in 85.5162 ms
+2025-03-16 12:35:08.447 +03:00 [INF] Server code-runner:14504:26fc508c is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2025-03-16 12:35:08.453 +03:00 [INF] Server code-runner:14504:26fc508c all the dispatchers started
+2025-03-16 12:35:25.199 +03:00 [WRN] Failed to determine the https port for redirect.
+2025-03-16 12:35:25.814 +03:00 [ERR] An unhandled exception occurred.
+TaskManagementSystem.Core.Exceptions.ValidationException: Email already exists
+   at TaskManagementSystem.Infrastructure.Services.AuthService.RegisterAsync(RegisterDto registerDto) in C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Infrastructure\Services\AuthService.cs:line 59
+   at TaskManagementSystem.API.Controllers.AuthController.Register(RegisterDto registerDto) in C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.API\Controllers\AuthController.cs:line 22
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at TaskManagementSystem.API.Middlewares.ExceptionHandlingMiddleware.InvokeAsync(HttpContext context) in C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.API\Middlewares\ExceptionHandlingMiddleware.cs:line 26
+2025-03-16 12:36:57.346 +03:00 [INF] Server code-runner:14504:26fc508c caught stopping signal...
+2025-03-16 12:36:57.350 +03:00 [INF] Server code-runner:14504:26fc508c All dispatchers stopped
+2025-03-16 12:36:57.353 +03:00 [INF] Server code-runner:14504:26fc508c successfully reported itself as stopped in 0.4126 ms
+2025-03-16 12:36:57.354 +03:00 [INF] Server code-runner:14504:26fc508c has been stopped in total 5.5341 ms
+2025-03-16 12:38:34.170 +03:00 [WRN] Entity 'TaskItem' has a global query filter defined and is the required end of a relationship with the entity 'Notification'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-03-16 12:38:34.948 +03:00 [INF] Starting Hangfire Server using job storage: 'Hangfire.MemoryStorage.MemoryStorage'
+2025-03-16 12:38:34.953 +03:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 4
+    Listening queues: 'default', 'notifications', 'critical'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2025-03-16 12:38:35.050 +03:00 [INF] Server code-runner:5016:9d20ad59 successfully announced in 80.4289 ms
+2025-03-16 12:38:35.055 +03:00 [INF] Server code-runner:5016:9d20ad59 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2025-03-16 12:38:35.059 +03:00 [INF] Server code-runner:5016:9d20ad59 all the dispatchers started
+2025-03-16 12:59:43.327 +03:00 [WRN] Failed to determine the https port for redirect.
+2025-03-16 13:09:33.922 +03:00 [ERR] An unhandled exception occurred.
+TaskManagementSystem.Core.Exceptions.NotFoundException: Assigned user not found
+   at TaskManagementSystem.Infrastructure.Services.TaskService.CreateTaskAsync(CreateTaskDto createTaskDto, Guid currentUserId) in C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Infrastructure\Services\TaskService.cs:line 101
+   at TaskManagementSystem.API.Controllers.TaskController.CreateTask(CreateTaskDto createTaskDto) in C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.API\Controllers\TaskController.cs:line 60
+   at lambda_method81(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at TaskManagementSystem.API.Middlewares.ExceptionHandlingMiddleware.InvokeAsync(HttpContext context) in C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.API\Middlewares\ExceptionHandlingMiddleware.cs:line 26
+2025-03-16 13:09:36.622 +03:00 [ERR] An unhandled exception occurred.
+TaskManagementSystem.Core.Exceptions.NotFoundException: Assigned user not found
+   at TaskManagementSystem.Infrastructure.Services.TaskService.CreateTaskAsync(CreateTaskDto createTaskDto, Guid currentUserId) in C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Infrastructure\Services\TaskService.cs:line 101
+   at TaskManagementSystem.API.Controllers.TaskController.CreateTask(CreateTaskDto createTaskDto) in C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.API\Controllers\TaskController.cs:line 60
+   at lambda_method81(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at TaskManagementSystem.API.Middlewares.ExceptionHandlingMiddleware.InvokeAsync(HttpContext context) in C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.API\Middlewares\ExceptionHandlingMiddleware.cs:line 26
+2025-03-16 13:09:37.208 +03:00 [ERR] An unhandled exception occurred.
+TaskManagementSystem.Core.Exceptions.NotFoundException: Assigned user not found
+   at TaskManagementSystem.Infrastructure.Services.TaskService.CreateTaskAsync(CreateTaskDto createTaskDto, Guid currentUserId) in C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Infrastructure\Services\TaskService.cs:line 101
+   at TaskManagementSystem.API.Controllers.TaskController.CreateTask(CreateTaskDto createTaskDto) in C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.API\Controllers\TaskController.cs:line 60
+   at lambda_method81(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at TaskManagementSystem.API.Middlewares.ExceptionHandlingMiddleware.InvokeAsync(HttpContext context) in C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.API\Middlewares\ExceptionHandlingMiddleware.cs:line 26
+2025-03-16 13:23:08.644 +03:00 [INF] Server code-runner:5016:9d20ad59 caught stopping signal...
+2025-03-16 13:23:08.650 +03:00 [INF] Server code-runner:5016:9d20ad59 All dispatchers stopped
+2025-03-16 13:23:08.654 +03:00 [INF] Server code-runner:5016:9d20ad59 successfully reported itself as stopped in 0.3233 ms
+2025-03-16 13:23:08.655 +03:00 [INF] Server code-runner:5016:9d20ad59 has been stopped in total 8.3485 ms
+2025-03-16 13:23:20.803 +03:00 [WRN] Entity 'TaskItem' has a global query filter defined and is the required end of a relationship with the entity 'Notification'. This may lead to unexpected results when the required entity is filtered out. Either configure the navigation as optional, or define matching query filters for both entities in the navigation. See https://go.microsoft.com/fwlink/?linkid=2131316 for more information.
+2025-03-16 13:23:21.633 +03:00 [INF] Starting Hangfire Server using job storage: 'Hangfire.MemoryStorage.MemoryStorage'
+2025-03-16 13:23:21.639 +03:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 4
+    Listening queues: 'default', 'notifications', 'critical'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2025-03-16 13:23:21.765 +03:00 [INF] Server code-runner:11212:1b66a026 successfully announced in 93.114 ms
+2025-03-16 13:23:21.769 +03:00 [INF] Server code-runner:11212:1b66a026 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2025-03-16 13:23:21.777 +03:00 [INF] Server code-runner:11212:1b66a026 all the dispatchers started
+2025-03-16 13:25:57.822 +03:00 [WRN] Failed to determine the https port for redirect.
+2025-03-16 13:27:22.645 +03:00 [ERR] An unhandled exception occurred.
+TaskManagementSystem.Core.Exceptions.NotFoundException: Assigned user not found
+   at TaskManagementSystem.Infrastructure.Services.TaskService.CreateTaskAsync(CreateTaskDto createTaskDto, Guid currentUserId) in C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Infrastructure\Services\TaskService.cs:line 101
+   at TaskManagementSystem.API.Controllers.TaskController.CreateTask(CreateTaskDto createTaskDto) in C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.API\Controllers\TaskController.cs:line 60
+   at lambda_method81(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at TaskManagementSystem.API.Middlewares.ExceptionHandlingMiddleware.InvokeAsync(HttpContext context) in C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.API\Middlewares\ExceptionHandlingMiddleware.cs:line 26
+2025-03-16 13:28:29.176 +03:00 [ERR] An unhandled exception occurred.
+TaskManagementSystem.Core.Exceptions.NotFoundException: Assigned user not found
+   at TaskManagementSystem.Infrastructure.Services.TaskService.CreateTaskAsync(CreateTaskDto createTaskDto, Guid currentUserId) in C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Infrastructure\Services\TaskService.cs:line 101
+   at TaskManagementSystem.API.Controllers.TaskController.CreateTask(CreateTaskDto createTaskDto) in C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.API\Controllers\TaskController.cs:line 60
+   at lambda_method81(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at TaskManagementSystem.API.Middlewares.ExceptionHandlingMiddleware.InvokeAsync(HttpContext context) in C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.API\Middlewares\ExceptionHandlingMiddleware.cs:line 26
+2025-03-16 13:30:43.151 +03:00 [ERR] An unhandled exception occurred.
+TaskManagementSystem.Core.Exceptions.NotFoundException: Task not found
+   at TaskManagementSystem.Infrastructure.Services.TaskService.AssignTaskAsync(Guid id, AssignTaskDto assignTaskDto) in C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Infrastructure\Services\TaskService.cs:line 158
+   at TaskManagementSystem.API.Controllers.TaskController.AssignTask(Guid id, AssignTaskDto assignTaskDto) in C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.API\Controllers\TaskController.cs:line 74
+   at lambda_method302(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at TaskManagementSystem.API.Middlewares.ExceptionHandlingMiddleware.InvokeAsync(HttpContext context) in C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.API\Middlewares\ExceptionHandlingMiddleware.cs:line 26
+2025-03-16 13:31:04.562 +03:00 [ERR] An unhandled exception occurred.
+TaskManagementSystem.Core.Exceptions.NotFoundException: Task not found
+   at TaskManagementSystem.Infrastructure.Services.TaskService.AssignTaskAsync(Guid id, AssignTaskDto assignTaskDto) in C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.Infrastructure\Services\TaskService.cs:line 158
+   at TaskManagementSystem.API.Controllers.TaskController.AssignTask(Guid id, AssignTaskDto assignTaskDto) in C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.API\Controllers\TaskController.cs:line 74
+   at lambda_method302(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at TaskManagementSystem.API.Middlewares.ExceptionHandlingMiddleware.InvokeAsync(HttpContext context) in C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.API\Middlewares\ExceptionHandlingMiddleware.cs:line 26
+2025-03-16 13:31:47.828 +03:00 [INF] Notification created for user 643aa7a6-a127-45a2-93f5-793eac7b3389 about task e336e5aa-37cf-4159-abf4-8b8baaec2ac4

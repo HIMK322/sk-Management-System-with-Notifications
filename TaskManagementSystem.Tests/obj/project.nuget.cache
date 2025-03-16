@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "NJxMc2sJQ+Y=",
+  "dgSpecHash": "tPk/fBeUDjg=",
   "success": true,
   "projectFilePath": "C:\\Users\\asus\\Documents\\CODE\\ticket notify\\TaskManagementSystem.Tests\\TaskManagementSystem.Tests.csproj",
   "expectedPackageFiles": [
@@ -15,6 +15,7 @@
     "C:\\Users\\asus\\.nuget\\packages\\fluentassertions\\8.2.0\\fluentassertions.8.2.0.nupkg.sha512",
     "C:\\Users\\asus\\.nuget\\packages\\hangfire.aspnetcore\\1.8.18\\hangfire.aspnetcore.1.8.18.nupkg.sha512",
     "C:\\Users\\asus\\.nuget\\packages\\hangfire.core\\1.8.18\\hangfire.core.1.8.18.nupkg.sha512",
+    "C:\\Users\\asus\\.nuget\\packages\\hangfire.memorystorage\\1.8.1.1\\hangfire.memorystorage.1.8.1.1.nupkg.sha512",
     "C:\\Users\\asus\\.nuget\\packages\\hangfire.netcore\\1.8.18\\hangfire.netcore.1.8.18.nupkg.sha512",
     "C:\\Users\\asus\\.nuget\\packages\\hangfire.postgresql\\1.20.10\\hangfire.postgresql.1.20.10.nupkg.sha512",
     "C:\\Users\\asus\\.nuget\\packages\\hangfire.redis.stackexchange\\1.9.4\\hangfire.redis.stackexchange.1.9.4.nupkg.sha512",

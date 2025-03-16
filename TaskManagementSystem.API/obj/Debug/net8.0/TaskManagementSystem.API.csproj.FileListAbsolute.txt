@@ -164,3 +164,5 @@ C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.API\bin\Debug\ne
 C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.API\bin\Debug\net8.0\Pipelines.Sockets.Unofficial.dll
 C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.API\bin\Debug\net8.0\StackExchange.Redis.dll
 C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.API\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
+C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.API\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\asus\Documents\CODE\ticket notify\TaskManagementSystem.API\bin\Debug\net8.0\Hangfire.MemoryStorage.dll

@@ -176,6 +176,18 @@
           }
         }
       },
+      "Hangfire.MemoryStorage/1.8.1.1": {
+        "type": "package",
+        "dependencies": {
+          "Hangfire.Core": "1.7.35"
+        },
+        "compile": {
+          "lib/netstandard1.3/Hangfire.MemoryStorage.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/Hangfire.MemoryStorage.dll": {}
+        }
+      },
       "Hangfire.NetCore/1.8.18": {
         "type": "package",
         "dependencies": {
@@ -2034,6 +2046,19 @@
         "lib/netstandard2.0/tr-TR/Hangfire.Core.resources.dll",
         "lib/netstandard2.0/zh-TW/Hangfire.Core.resources.dll",
         "lib/netstandard2.0/zh/Hangfire.Core.resources.dll"
+      ]
+    },
+    "Hangfire.MemoryStorage/1.8.1.1": {
+      "sha512": "qXq7rr2c4UoX5aFZcji817RPTzNR/hX4T27jhp7YNYcGiGNsyi2bjp+yX9AhICQlyrm4/W7YDGgm/mxVkeEAng==",
+      "type": "package",
+      "path": "hangfire.memorystorage/1.8.1.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "hangfire.memorystorage.1.8.1.1.nupkg.sha512",
+        "hangfire.memorystorage.nuspec",
+        "lib/net40/Hangfire.MemoryStorage.dll",
+        "lib/netstandard1.3/Hangfire.MemoryStorage.dll"
       ]
     },
     "Hangfire.NetCore/1.8.18": {
@@ -4687,6 +4712,7 @@
       "AspNetCoreRateLimit >= 5.0.0",
       "Hangfire.AspNetCore >= 1.8.18",
       "Hangfire.Core >= 1.8.18",
+      "Hangfire.MemoryStorage >= 1.8.1.1",
       "Hangfire.PostgreSql >= 1.20.10",
       "Hangfire.Redis.StackExchange >= 1.9.4",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 8.0.0",
@@ -4773,6 +4799,10 @@
           "Hangfire.Core": {
             "target": "Package",
             "version": "[1.8.18, )"
+          },
+          "Hangfire.MemoryStorage": {
+            "target": "Package",
+            "version": "[1.8.1.1, )"
           },
           "Hangfire.PostgreSql": {
             "target": "Package",

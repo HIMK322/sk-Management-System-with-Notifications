@@ -16,7 +16,8 @@ A robust ASP.NET Core 8 application for managing tasks and sending notifications
 - ASP.NET Core 8
 - Entity Framework Core with PostgreSQL
 - Hangfire for background jobs
-- Redis for caching and rate limiting
+- Redis for caching and rate limiting (in production)
+- In-memory alternatives for local development
 - Serilog for structured logging
 - Swagger for API documentation
 - Docker containerization
@@ -27,7 +28,6 @@ A robust ASP.NET Core 8 application for managing tasks and sending notifications
 
 - .NET 8 SDK
 - PostgreSQL
-- Docker (optional)
 
 ### Configuration
 
@@ -46,6 +46,14 @@ A robust ASP.NET Core 8 application for managing tasks and sending notifications
      "Audience": "TaskManagementSystemUsers"
    }
    ```
+
+3. Development vs Production Configuration:
+   - For local development, Redis is not required (in-memory implementations are used instead)
+   - For production, Redis is used for caching, Hangfire, and rate limiting
+   - You can toggle Redis usage in development by setting the `UseRedis` flag in `appsettings.Development.json`:
+     ```json
+     "UseRedis": false
+     ```
 
 ### Running the Application
 
@@ -70,8 +78,9 @@ dotnet add TaskManagementSystem.API/TaskManagementSystem.API.csproj package AspN
 dotnet add TaskManagementSystem.API/TaskManagementSystem.API.csproj package AspNetCore.HealthChecks.Redis
 dotnet add TaskManagementSystem.API/TaskManagementSystem.API.csproj package AspNetCore.HealthChecks.Hangfire
 
-# Hangfire Redis
+# Hangfire storage
 dotnet add TaskManagementSystem.API/TaskManagementSystem.API.csproj package Hangfire.Redis.StackExchange
+dotnet add TaskManagementSystem.API/TaskManagementSystem.API.csproj package Hangfire.MemoryStorage
 
 # Swagger Annotations
 dotnet add TaskManagementSystem.Core/TaskManagementSystem.Core.csproj package Swashbuckle.AspNetCore.Annotations
@@ -100,15 +109,28 @@ docker-compose up -d
 # - Hangfire Dashboard: http://localhost:8080/hangfire
 ```
 
+### Local Development vs. Production
+
+#### Local Development
+- The application uses in-memory alternatives for Redis-dependent features
+- Hangfire jobs use in-memory storage
+- Caching uses an in-memory implementation
+- Rate limiting uses in-memory storage
+
+#### Production
+- Redis is used for distributed caching
+- Hangfire jobs are stored in Redis
+- Rate limiting uses Redis for persistence across instances
+
 ### Accessing the Application
 
-### Local Development
+#### Local Development
 - API: `https://localhost:7055` or `http://localhost:5055` (ports may vary)
 - Swagger UI: `https://localhost:7055/swagger` or `http://localhost:5055/swagger`
 - Hangfire Dashboard: `https://localhost:7055/hangfire` or `http://localhost:5055/hangfire`
 - Health Status: `https://localhost:7055/health`
 
-### Docker Environment
+#### Docker Environment
 - API & Swagger: `http://localhost:8080/swagger`
 - Hangfire Dashboard: `http://localhost:8080/hangfire`
 - Redis Commander UI: `http://localhost:8081`
@@ -131,6 +153,25 @@ docker-compose up -d
 | GET | /api/notifications | Retrieve notifications for the logged-in user | Yes |
 
 ## Implementation Details
+
+### Development Mode Enhancements
+
+The application includes support for development without Redis:
+
+1. **In-Memory Cache Service**:
+   - A complete in-memory implementation of the `ICacheService` interface
+   - Automatically used during development when Redis is not available
+   - Provides the same API and functionality as the Redis implementation
+
+2. **Hangfire In-Memory Storage**:
+   - Uses Hangfire.MemoryStorage for background jobs during development
+   - No Redis dependency for local testing and development
+   - Same API and functionality as the Redis-based implementation
+
+3. **Configuration-Based Toggle**:
+   - Control Redis usage with a simple configuration flag
+   - Set `"UseRedis": true` in appsettings.Development.json to test Redis integration
+   - Set `"UseRedis": false` for pure in-memory operation
 
 ### Soft Delete Implementation
 
@@ -180,9 +221,9 @@ The application implements a soft delete mechanism for tasks to maintain data in
    - Preserves referential integrity in the database
    - Enables "trash bin" functionality for administrative users
 
-### Redis Caching and Rate Limiting
+### Redis Caching and Rate Limiting (Production)
 
-The application implements Redis for two primary purposes:
+In production, the application implements Redis for two primary purposes:
 
 1. **Performance Optimization with Caching**:
    - Frequently accessed data like pending tasks and user-specific tasks are cached in Redis
@@ -229,6 +270,8 @@ The application includes Docker support for containerized deployment:
      * Redis Commander for Redis monitoring at http://localhost:8081
      * pgAdmin for PostgreSQL management at http://localhost:5050
    - Service dependencies with proper startup ordering
+
+### Notification System
 
 Task assignment is implemented using an asynchronous notification system:
 
@@ -295,7 +338,3 @@ Run the tests using the .NET CLI:
 ```bash
 dotnet test TaskManagementSystem.Tests
 ```
-
-## License
-
-MIT

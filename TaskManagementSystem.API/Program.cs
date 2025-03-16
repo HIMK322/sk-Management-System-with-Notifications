@@ -20,6 +20,9 @@ using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Determine if we should use Redis or in-memory alternatives
+bool useRedis = !builder.Environment.IsDevelopment() || builder.Configuration.GetValue<bool>("UseRedis");
+
 // Configure Serilog
 Log.Logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)
@@ -47,19 +50,56 @@ builder.Services.AddCors(options =>
     });
 });
 
-// Configure Redis Cache
-builder.Services.AddStackExchangeRedisCache(options =>
-{
-    options.Configuration = builder.Configuration.GetConnectionString("RedisCache") ?? "localhost:6379";
-    options.InstanceName = "TaskManagement_";
-});
-
-// Configure Rate Limiting with Redis
+// Add memory cache (needed for both implementations)
 builder.Services.AddMemoryCache();
-builder.Services.Configure<IpRateLimitOptions>(builder.Configuration.GetSection("IpRateLimiting"));
-builder.Services.Configure<IpRateLimitPolicies>(builder.Configuration.GetSection("IpRateLimitPolicies"));
-builder.Services.AddInMemoryRateLimiting();
-builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+
+if (useRedis)
+{
+    // Configure Redis Cache for production
+    builder.Services.AddStackExchangeRedisCache(options =>
+    {
+        options.Configuration = builder.Configuration.GetConnectionString("RedisCache");
+        options.InstanceName = "TaskManagement_";
+    });
+    
+    // Configure Rate Limiting with Redis
+    builder.Services.Configure<IpRateLimitOptions>(builder.Configuration.GetSection("IpRateLimiting"));
+    builder.Services.Configure<IpRateLimitPolicies>(builder.Configuration.GetSection("IpRateLimitPolicies"));
+    builder.Services.AddInMemoryRateLimiting();
+    builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+    
+    // Use Redis for Hangfire
+    builder.Services.AddHangfireWithRedis(builder.Configuration);
+    
+    // Use Redis-based cache service
+    builder.Services.AddSingleton<ICacheService, RedisCacheService>();
+}
+else
+{
+    // For development, use in-memory implementations
+    builder.Services.AddDistributedMemoryCache();
+    
+    // Use in-memory Hangfire storage
+    builder.Services.AddHangfireWithMemoryStorage();
+    
+    // Use in-memory cache service
+    builder.Services.AddSingleton<ICacheService, InMemoryCacheService>();
+    
+    // Configure Rate Limiting with in-memory store
+    builder.Services.Configure<IpRateLimitOptions>(builder.Configuration.GetSection("IpRateLimiting"));
+    builder.Services.Configure<IpRateLimitPolicies>(builder.Configuration.GetSection("IpRateLimitPolicies"));
+    builder.Services.AddInMemoryRateLimiting();
+    builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+    
+    builder.Services.AddLogging(logging => 
+    {
+        logging.AddConsole()
+               .AddDebug()
+               .AddFilter("Microsoft", LogLevel.Warning)
+               .AddFilter("System", LogLevel.Warning)
+               .AddFilter("TaskManagementSystem", LogLevel.Information);
+    });
+}
 
 // Configure DbContext
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -90,7 +130,6 @@ builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
 
 // Register services
 builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddSingleton<ICacheService, RedisCacheService>();
 builder.Services.AddScoped<INotificationService, NotificationService>();
 
 // Register TaskService with cache dependency
@@ -101,9 +140,6 @@ builder.Services.AddScoped<ITaskService>(provider => new TaskService(
     provider.GetRequiredService<ICacheService>(),
     provider.GetRequiredService<ILogger<TaskService>>()
 ));
-
-// Configure Hangfire with Redis
-builder.Services.AddHangfireWithRedis(builder.Configuration);
 
 // Add Health Checks
 builder.Services.AddApplicationHealthChecks(builder.Configuration);
@@ -147,10 +183,20 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
-// Initialize Redis connection
-var loggerFactory = app.Services.GetRequiredService<ILoggerFactory>();
-var redisLogger = loggerFactory.CreateLogger<Program>();
-RedisConnectionHelper.InitializeConnection(builder.Configuration, redisLogger);
+// Initialize Redis connection if we're using it
+if (useRedis)
+{
+    var loggerFactory = app.Services.GetRequiredService<ILoggerFactory>();
+    var redisLogger = loggerFactory.CreateLogger<Program>();
+    try 
+    {
+        RedisConnectionHelper.InitializeConnection(builder.Configuration, redisLogger);
+    }
+    catch (Exception ex) 
+    {
+        redisLogger.LogError(ex, "Failed to initialize Redis connection, but continuing application startup");
+    }
+}
 
 // Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
